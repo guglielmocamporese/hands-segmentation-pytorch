@@ -11,6 +11,8 @@ In this project I considered the following datasets for training the model:
 - GTEA
 - HandOverFace (HOF)
 
+I set up a script `scripts/download_datasets.sh` that downloads and prepares all the previous datasets into the `DATA_BASE_PATH` folder, specified in the script.
+
 
 # Model
 I used the [PyTorch implementation](https://pytorch.org/vision/stable/models.html#semantic-segmentation) of  [DeepLabV3](https://arxiv.org/abs/1706.05587) with ResNet50 backbone.
@@ -66,7 +68,9 @@ python main.py \
 ```
 
 # Predict From a Custom Dataset
-An example of script used for predicting with the model is reported in `script/predict.sh`, and reported here:
+With this code you can do inference and compute the predictions starting from a set of custom images, you just have to specify the folder that contains the images in the variable `data_base_path` in the `script/predict.sh` script.
+
+You can find an example of a script used for predicting at `script/predict.sh`, and reported here: 
 
 ```bash
 #!/bin/bash
