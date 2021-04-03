@@ -32,6 +32,7 @@ def get_args():
     parser.add_argument('--model_pretrained', default=False, action='store_true', 
                         help='Load the PyTorch pretrained model.')
     parser.add_argument('--model_checkpoint', type=str, default='', help='The model checkpoint to load.')
+    parser.add_argument('--lr', type=float, default=3e-4, help='The learning rate.')
     args = parser.parse_args()
     print(json.dumps(vars(args), indent=4))
     return args
@@ -39,6 +40,7 @@ def get_args():
 def get_model(args):
     model_args = {
         'pretrained': args.model_pretrained,
+        'lr': args.lr,
     }
     model = HandSegModel(**model_args)
     if len(args.model_checkpoint) > 0:

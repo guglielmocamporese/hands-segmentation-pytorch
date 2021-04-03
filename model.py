@@ -22,10 +22,11 @@ class HandSegModel(pl.LightningModule):
     """
     This model is based on the PyTorch DeepLab model for semantic segmentation.
     """
-    def __init__(self, pretrained=False):
+    def __init__(self, pretrained=False, lr=1e-4):
         super(HandSegModel,self).__init__()
         self.deeplab = self._get_deeplab(pretrained=pretrained, num_classes=2)
         self.denorm_image_for_tb_log = None # For tensorboard logging
+        self.lr = lr
 
     def _get_deeplab(self, pretrained=False, num_classes=2):
         """
@@ -103,7 +104,7 @@ class HandSegModel(pl.LightningModule):
         return loss
 
     def configure_optimizers(self):
-        return Adam(self.parameters(), lr=3e-4)
+        return Adam(self.parameters(), lr=self.lr)
 
     def set_denorm_fn(self, denorm_fn):
         self.denorm_image_for_tb_log = denorm_fn

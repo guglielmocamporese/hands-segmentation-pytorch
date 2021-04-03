@@ -2,7 +2,7 @@
 
 ## Example of predictions on the test set
 ![alt text](test_preds.png "Title")
-The model checkpoint reaches 0.904 of mIoU on the test set.
+The model checkpoint reaches `0.904` of mIoU on the test set.
 
 # Datasets
 In this project I considered the following datasets for training the model:
@@ -13,9 +13,8 @@ In this project I considered the following datasets for training the model:
 
 I set up a script `scripts/download_datasets.sh` that downloads and prepares all the previous datasets into the `DATA_BASE_PATH` folder, specified in the script.
 
-
 # Model
-I used the [PyTorch implementation](https://pytorch.org/vision/stable/models.html#semantic-segmentation) of  [DeepLabV3](https://arxiv.org/abs/1706.05587) with ResNet50 backbone.
+I used the [PyTorch implementation](https://pytorch.org/vision/stable/models.html#semantic-segmentation) of [DeepLabV3](https://arxiv.org/abs/1706.05587) with ResNet50 backbone.
 
 # Train
 An example of script used for training the model is reported in `scripts/train.sh` and reported here:
