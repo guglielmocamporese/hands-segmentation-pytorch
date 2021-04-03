@@ -18,7 +18,7 @@ I set up a script `scripts/download_datasets.sh` that downloads and prepares all
 I used the [PyTorch implementation](https://pytorch.org/vision/stable/models.html#semantic-segmentation) of  [DeepLabV3](https://arxiv.org/abs/1706.05587) with ResNet50 backbone.
 
 # Train
-An example of script used for training the model is reported in `script/train.sh`, and reported here:
+An example of script used for training the model is reported in `scripts/train.sh` and reported here:
 
 ```bash
 #!/bin/bash
@@ -36,7 +36,7 @@ python main.py \
 ```
 
 # Finetuning
-An example of script used for finetuning the model is reported in `script/finetune.sh`, and reported here:
+An example of script used for finetuning the model is reported in `scripts/finetune.sh` and reported here:
 
 ```bash
 #!/bin/bash
@@ -55,7 +55,7 @@ python main.py \
 ```
 
 # Test
-An example of script used for testing the model is reported in `script/test.sh`, and reported here:
+An example of script used for testing the model is reported in `scripts/test.sh` and reported here:
 
 ```bash
 #!/bin/bash
@@ -72,7 +72,7 @@ With this code you can do inference and compute the predictions starting from a 
 
 Each prediction computed from the image `path/to/image.jpg` will be saved at `path/to/image.jpg.png`. 
 
-You can find an example of a script used for predicting at `script/predict.sh`, and reported here: 
+You can find an example of a script used for predicting at `scripts/predict.sh`. I also reported it here: 
 
 ```bash
 #!/bin/bash
