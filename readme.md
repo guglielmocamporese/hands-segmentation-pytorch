@@ -1,5 +1,9 @@
 # Hands Segmentation in PyTorch - A Plug and Play Model
 
+## Example of predictions on the test set
+![alt text](test_preds.png "Title")
+The model checkpoint reaches 0.904 of mIoU on the test set.
+
 # Datasets
 In this project I considered the following datasets for training the model:
 - EgoHands
