@@ -70,6 +70,8 @@ python main.py \
 # Predict From a Custom Dataset
 With this code you can do inference and compute the predictions starting from a set of custom images, you just have to specify the folder that contains the images in the variable `data_base_path` in the `script/predict.sh` script.
 
+Each prediction computed from the image `path/to/image.jpg` will be saved at `path/to/image.jpg.png`. 
+
 You can find an example of a script used for predicting at `script/predict.sh`, and reported here: 
 
 ```bash
