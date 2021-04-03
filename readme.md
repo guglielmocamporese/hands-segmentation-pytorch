@@ -6,10 +6,22 @@ The model checkpoint reaches `0.904` of mIoU on the test set.
 
 # Datasets
 In this project I considered the following datasets for training the model:
-- EgoHands
-- EgoYouTubeHands (EYTH) 
-- GTEA
-- HandOverFace (HOF)
+- EgoHands [link](http://vision.soic.indiana.edu/projects/egohands/)
+  - 4800 labeled frames (100 labeled frames from 48 different videos),
+  - each frame is 720x1280,
+  - 1.3 GB of zip file,
+- EgoYouTubeHands (EYTH) [link](https://github.com/aurooj/Hand-Segmentation-in-the-Wild)
+  - 774 labeled frames,
+  - each frame is 216x384,
+  - 17 MB of tar.gz file,
+- GTEA (with GTEA GAZE PLUS)[link](http://cbs.ic.gatech.edu/fpv/)
+  - 1067 labeled frames,
+  - each frame of GTEA is 405x720, each frame of GTEA GAZE PLUS is 720x960,
+  - 250 MB of zip file, 
+- HandOverFace (HOF) [link](https://github.com/aurooj/Hand-Segmentation-in-the-Wild)
+  - 180 labeled frames,
+  - each frame is 384x216,
+  - 41 MB of tar.gz file,
 
 I set up a script `scripts/download_datasets.sh` that downloads and prepares all the previous datasets into the `DATA_BASE_PATH` folder, specified in the script.
 
