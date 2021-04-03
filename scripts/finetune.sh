@@ -2,7 +2,7 @@
 
 python main.py \
     --mode train \
-    --epochs 1 \
+    --epochs 10 \
     --batch_size 16 \
     --gpus 1 \
     --datasets 'eyth eh hof gtea' \
