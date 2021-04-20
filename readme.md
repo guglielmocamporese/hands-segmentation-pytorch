@@ -1,29 +1,24 @@
-
 # Hands Segmentation in PyTorch - A Plug and Play Model
 
-If you need hands segmentation for your project, you are in the correct place!
+If you need hands segmentations for your project, you are in the correct place!
 
 ## What you can do with this code
 This code provides:
-- A collection of **4** different **datasets** for hands segmentation (see the **Datasets** section for more details), that can be use for train a hands segmentation model,
+- A collection of **4** different **datasets** for hands segmentation (see the **Datasets** section for more details), that can be used for train a hands segmentation model,
 
 -  **Train** and **evaluate** a hand segmentation model,
 
-- **Finetune** a our provided  model for hand segmentation on a custom dataset,
+- **Finetune** a pre-trained  model, that I provide (see the **Model** section), for hand segmentation on a custom dataset,
 
--  **Get hands segmentation maps** on unseen (your) custom data, using our pretrained (or your) model.
+-  **Get hands segmentation maps** on unseen (your) custom data, using my pre-trained (or your) model.
 
   
 
-##### Example of Predictions on the Test Set
+## Results
 
 ![alt text](test_preds.png "Title")
 
-  
-
-##### Performance
-
-The model checkpoint reaches `0.904` of mIoU on the test set.
+The model checkpoint reaches `0.904` of mean Intersection over Union (mIoU) on the test set.
 
 
 ## Install
@@ -54,43 +49,41 @@ $ conda activate hands
 
 # Datasets
 
+I set up a script `scripts/download_datasets.sh` that downloads and prepares all the datasets described below into the `DATA_BASE_PATH` folder, specified in the script itself.
+
 In this project I considered the following datasets for training the model:
 
 - #### **EgoHands** [[link]](http://vision.soic.indiana.edu/projects/egohands/)
 
-- **4800** labeled frames (**100** labeled frames from **48** different videos),
+  - **4800** labeled frames (**100** labeled frames from **48** different videos),
 
-- each frame is **720**x**1280**,
+  - each frame is **720**x**1280**,
 
-- **1.3** GB of zip file,
+  - **1.3** GB of zip file,
 
 - #### **EgoYouTubeHands (EYTH)** [[link]](https://github.com/aurooj/Hand-Segmentation-in-the-Wild)
 
-- **774** labeled frames,
+  - **774** labeled frames,
 
-- each frame is **216**x**384**,
+  - each frame is **216**x**384**,
 
-- **17** MB of tar.gz file,
+  - **17** MB of tar.gz file,
 
 - #### **GTEA (with GTEA GAZE PLUS)** [[link]](http://cbs.ic.gatech.edu/fpv/)
 
-- **1067** labeled frames,
+  - **1067** labeled frames,
 
-- each frame of GTEA is **405**x**720**, each frame of GTEA GAZE PLUS is **720**x**960**,
+  - each frame of GTEA is **405**x**720**, each frame of GTEA GAZE PLUS is **720**x**960**,
 
-- **250** MB of zip file,
+  - **250** MB of zip file,
 
 - #### **HandOverFace (HOF)** [[link]](https://github.com/aurooj/Hand-Segmentation-in-the-Wild)
 
-- **180** labeled frames,
+  - **180** labeled frames,
 
-- each frame is **384**x**216**,
+  - each frame is **384**x**216**,
 
-- **41** MB of tar.gz file,
-
-  
-
-I set up a script `scripts/download_datasets.sh` that downloads and prepares all the previous datasets into the `DATA_BASE_PATH` folder, specified in the script itself.
+  - **41** MB of tar.gz file.
 
   
 
