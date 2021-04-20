@@ -21,7 +21,7 @@ This code provides:
 The model checkpoint reaches `0.904` of mean Intersection over Union (mIoU) on the test set.
 
 
-## Install
+# Install
 Once you have cloned the repo, all the commands below should be runned inside the main project folder  `hands` folder:
 
 ```python
