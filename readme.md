@@ -43,10 +43,6 @@ $ conda env create --file environment.yaml
 $ conda activate hands
 ```
 
-
-
-  
-
 # Datasets
 
 I set up a script `scripts/download_datasets.sh` that downloads and prepares all the datasets described below into the `DATA_BASE_PATH` folder, specified in the script itself.
