@@ -22,18 +22,22 @@ def show_sample(image, mask=None, alpha=0.7):
     plt.imshow(image.permute(1, 2, 0))
     if mask is not None:
         print('Mask shape:', mask.shape)
+
         plt.imshow(mask[0], alpha=alpha)
     plt.show()
 
 def show_samples(images, masks=None, alpha=0.7, nrow=4):
     print('Images shape:', images.shape)
-    image_grid = make_grid(images, nrow=nrow)
+    if masks is not None:
+        print('Masks shape:', masks.shape)
+        B, C, H, W = images.shape
+        col = [0.2, 0.3, 0.8]
+        col = torch.tensor(col).unsqueeze(0).unsqueeze(-1).unsqueeze(-1).repeat(B, 1, H, W)
+        images = torch.where(masks.repeat(1, 3, 1, 1) > 0, 
+                             alpha * col + (1 - alpha) * images, images)
+    image_grid = make_grid(images, nrow=nrow, padding=0)
     plt.figure(figsize=(15, 15))
     plt.imshow(image_grid.permute(1, 2, 0), aspect='auto')
-    if masks is not None:
-        mask_grid = make_grid(masks, nrow=nrow)
-        print('Masks shape:', masks.shape)
-        plt.imshow(mask_grid[0], alpha=alpha)
     plt.axis(False)
     plt.show()
 
