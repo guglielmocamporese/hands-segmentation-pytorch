@@ -99,66 +99,6 @@ $ ./scripts/download_model_checkpoint.sh
 This will download the checkpoint `checkpoint.ckpt` inside the `./checkpoint` folder.
 
   
-
-# Train
-
-An example of script used for training the model is reported in `scripts/train.sh` and reported here:
-
-  
-
-```bash
-python main.py \
-	--mode train \
-	--epochs 50 \
-	--batch_size 16 \
-	--gpus 1 \
-	--datasets 'eyth eh hof gtea' \
-	--height 256 \
-	--width 256 \
-	--data_base_path './data' \
-	--model_pretrained
-```
-
-  
-
-# Finetuning
-
-An example of script used for finetuning the model is reported in `scripts/finetune.sh` and reported here:
-
-  
-
-```bash
-python main.py \
-	--mode train \
-	--epochs 10 \
-	--batch_size 16 \
-	--gpus 1 \
-	--datasets 'eyth eh hof gtea' \
-	--height 256 \
-	--width 256 \
-	--data_base_path './data' \
-	--model_checkpoint "./checkpoint/checkpoint.ckpt"
-	--model_pretrained
-```
-
-  
-
-# Test
-
-An example of script used for testing the model is reported in `scripts/test.sh` and reported here:
-
-  
-
-```bash
-python main.py \
-	--mode test \
-	--data_base_path "./data" \
-	--model_pretrained \
-	--model_checkpoint "./checkpoint/checkpoint.ckpt"
-```
-
-  
-
 # Predict From a Custom Dataset
 
 With this code you can do inference and compute the predictions starting from a set of custom images, you just have to specify the folder that contains the images in the variable `data_base_path` in the `scripts/predict.sh` script.
@@ -180,3 +120,59 @@ python main.py \
 	--model_checkpoint "./checkpoint/checkpoint.ckpt" \
 	--model_pretrained
 ```
+
+# Finetuning
+
+An example of script used for finetuning the model is reported in `scripts/finetune.sh` and reported here:
+
+  
+
+```bash
+python main.py \
+	--mode train \
+	--epochs 10 \
+	--batch_size 16 \
+	--gpus 1 \
+	--datasets 'eyth eh hof gtea' \
+	--height 256 \
+	--width 256 \
+	--data_base_path './data' \
+	--model_checkpoint "./checkpoint/checkpoint.ckpt"
+	--model_pretrained
+```
+
+# Train
+
+An example of script used for training the model is reported in `scripts/train.sh` and reported here:
+
+  
+
+```bash
+python main.py \
+	--mode train \
+	--epochs 50 \
+	--batch_size 16 \
+	--gpus 1 \
+	--datasets 'eyth eh hof gtea' \
+	--height 256 \
+	--width 256 \
+	--data_base_path './data' \
+	--model_pretrained
+```
+
+# Test
+
+An example of script used for testing the model is reported in `scripts/test.sh` and reported here:
+
+  
+
+```bash
+python main.py \
+	--mode test \
+	--data_base_path "./data" \
+	--model_pretrained \
+	--model_checkpoint "./checkpoint/checkpoint.ckpt"
+```
+
+  
+
