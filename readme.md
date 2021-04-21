@@ -5,14 +5,10 @@ If you need hands segmentations for your project, you are in the correct place!
 ## What you can do with this code
 This code provides:
 - A collection of **4** different **datasets** for hands segmentation (see the **Datasets** section for more details), that can be used for train a hands segmentation model,
+- the scripts for **training** and **evaluating** a hand segmentation model,
+- the scripts for **finetuning** my pre-trained model, that you can download (see the **Model** section), for hand segmentation on a custom dataset,
+- the scripts for **computing hands segmentation maps** on unseen (your) custom data, using my pre-trained (or your) model.
 
--  **Train** and **evaluate** a hand segmentation model,
-
-- **Finetune** a pre-trained  model, that I provide (see the **Model** section), for hand segmentation on a custom dataset,
-
--  **Get hands segmentation maps** on unseen (your) custom data, using my pre-trained (or your) model.
-
-  
 
 ## Results on the Test Dataset
 
