@@ -10,7 +10,11 @@ import torch
 import torch.hub
 
 # Create the model
-model = torch.hub.load('guglielmocamporese/hands-segmentation-pytorch', 'hand_segmentor', pretrained=True)
+model = torch.hub.load(
+    repo_or_dir='guglielmocamporese/hands-segmentation-pytorch', 
+    model='hand_segmentor', 
+    pretrained=True
+)
 
 # Inference
 model.eval()
