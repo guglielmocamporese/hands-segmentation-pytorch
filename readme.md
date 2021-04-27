@@ -24,8 +24,11 @@ preds = model(img_rnd).argmax(1) # [B, H, W]
 
 ## Results on the Validation and Test Datasets
 
+### Predictions on some test images
+
 ![alt text](test_preds.png "Title")
 
+### Table
 | Dataset                | Partition  | mIoU  |
 | ---------------------- | ---------- | ----- |
 | EgoYouTubeHands        | Validation | 0.818 |
