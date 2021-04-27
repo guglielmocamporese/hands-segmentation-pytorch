@@ -22,11 +22,20 @@ img_rnd = torch.randn(1, 3, 256, 256) # [B, C, H, W]
 preds = model(img_rnd).argmax(1) # [B, H, W]
 ```
 
-## Results on the Test Dataset
+## Results on the Validation and Test Datasets
 
 ![alt text](test_preds.png "Title")
 
-The model checkpoint reaches `0.904` of mean Intersection over Union (mIoU) on the test set.
+| Dataset                | Partition  | mIoU  |
+| ---------------------- | ---------- | ----- |
+| EgoYouTubeHands        | Validation | 0.818 |
+| EgoYouTubeHands        | Test       | 0.816 |
+| EgoHands               | Validation | 0.919 |
+| EgoHands               | Test       | 0.920 |
+| HandOverFace           | Validation | 0.814 |
+| HandOverFace           | Test       | 0.768 |
+| GTEA                   | Validation | 0.960 |
+| GTEA                   | Test       | 0.949 |
 
 ## What you can do with this code
 This code provides:
