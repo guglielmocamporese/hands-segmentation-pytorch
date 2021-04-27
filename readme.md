@@ -4,6 +4,7 @@ If you need hands segmentations for your project, you are in the correct place!
 
 ## What you can do with this code
 This code provides:
+- A plug and play pretrained model for hand segmentation, either usable directly from `torch hub` (see the **Direct Usage form Torch Hub** section) or usable cloning this repo,
 - A collection of **4** different **datasets** for hands segmentation (see the **Datasets** section for more details), that can be used for train a hands segmentation model,
 - the scripts for **training** and **evaluating** a hand segmentation model (see the **Train** and **Test** sections),
 - the scripts for **finetuning** my pre-trained model, that you can download (see the **Model** section), for hand segmentation on a custom dataset (see the **Finetune** section),
@@ -16,8 +17,24 @@ This code provides:
 
 The model checkpoint reaches `0.904` of mean Intersection over Union (mIoU) on the test set.
 
+# Direct Usage form Torch Hub
 
-# Install
+```python
+# Imports
+import torch
+import torch.hub
+
+# Create the model
+model = torch.hub.load('guglielmocamporese/hands-segmentation-pytorch', 'hand_segmentor', pretrained=True)
+
+# Inference
+model.eval()
+img_rnd = torch.randn(1, 3, 256, 256) # [B, C, H, W]
+preds = model(img_rnd).argmax(1) # [B, H, W]
+```
+
+
+# Install Locally
 Once you have cloned the repo, all the commands below should be runned inside the main project folder  `hands` folder:
 
 ```python
