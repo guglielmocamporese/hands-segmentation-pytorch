@@ -118,6 +118,19 @@ def main(args):
         trainer = pl.Trainer(max_epochs=args.epochs, gpus=args.gpus)
         trainer.fit(model, dls['train'], dls['validation'])
 
+    elif args.mode == 'validation':
+
+        # Dataloaders
+        dls = get_dataloaders(args)
+
+        if args.model_pretrained:
+            mean = np.array([0.485, 0.456, 0.406])
+            std = np.array([0.229, 0.224, 0.225])
+            denorm_fn = Denorm(mean, std)
+            model.set_denorm_fn(denorm_fn)
+        trainer = pl.Trainer(gpus=args.gpus)
+        trainer.test(model, dls['validation'])
+
     elif args.mode == 'test':
 
         # Dataloaders
