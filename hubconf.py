@@ -32,7 +32,7 @@ def hand_segmentor(pretrained=True, *args, **kwargs):
 def _download_file_from_google_drive(id, destination):
 
     url = f'https://drive.google.com/uc?id={id}'
-    path = ps.path.dirname(destination)
+    path = os.path.dirname(destination)
     if not os.path.exists(path):
         os.makedirs(path)
     gdown.download(url, destination, quiet=False)
