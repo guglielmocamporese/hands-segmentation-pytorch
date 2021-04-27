@@ -9,7 +9,7 @@ Torch Hub script for accessing te hand segmentation model outside the repo.
 from model import HandSegModel
 import os
 
-dependencies = ['torch', 'pytorch_lightning']
+dependencies = ['torch', 'pytorch_lightning', 'pytorch-lightning']
 
 
 def hand_segmentor(pretrained=True, *args, **kwargs):
