@@ -2,6 +2,8 @@
 
 If you need hands segmentations for your project, you are in the correct place!
 
+If you use the code of this repo and you find this project useful, please consider to give a star ⭐!
+
 # Direct Usage form Torch Hub
 
 ```python
