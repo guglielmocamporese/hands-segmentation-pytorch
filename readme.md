@@ -68,7 +68,7 @@ Furthermore, all the requirements for running the code are specified in the  `en
 
 ```
 # Install the conda env
-$ conda env create --file environment.yaml
+$ conda env create --file environment.yml
 
 # Activate the conda env
 $ conda activate hands
