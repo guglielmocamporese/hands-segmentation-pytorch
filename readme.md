@@ -64,7 +64,7 @@ $ cd hands
 ```
 To run the code you need to have conda installed (version >= 4.9.2).
 
-Furthermore, all the requirements for running the code are specified in the  `environment.yaml`  file and can be installed with:
+Furthermore, all the requirements for running the code are specified in the  `environment.yml`  file and can be installed with:
 
 ```
 # Install the conda env
