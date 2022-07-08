@@ -158,10 +158,13 @@ def main(args):
         _ = model.eval()
         device = next(model.parameters()).device
         for x, x_path in tqdm(ds, desc='Save predictions'):
+            H, W = x.shape[-2:]
+            x = transforms.Resize((256, 256))(x)
             x = x.unsqueeze(0).to(device)
             logits = model(x).detach().cpu()
             preds = F.softmax(logits, 1).argmax(1)[0] * 255 # [h, w]
-            preds = Image.fromarray(preds.numpy().astype(np.uint8), 'P')
+            preds = Image.fromarray(preds.numpy().astype(np.uint8), 'L')
+            preds = preds.resize((W, H))
             preds.save(f'{x_path}.png')
 
     else:
