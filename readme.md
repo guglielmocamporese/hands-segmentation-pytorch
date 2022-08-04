@@ -8,6 +8,8 @@ If you use the code of this repo and you find this project useful,
 please consider to give a star ⭐!
 ```
 
+[![DOI](https://zenodo.org/badge/354173236.svg)](https://zenodo.org/badge/latestdoi/354173236)
+
 ## Updates
 - **[2021/04/03]** - The code is online!
 - **[2022/08/04]** - This repo was used in the 3rd model entry at the "AI City Challenge 2022" challenge at CVPR 2022. 
