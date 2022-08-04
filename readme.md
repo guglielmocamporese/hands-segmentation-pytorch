@@ -1,10 +1,17 @@
+
 # Hands Segmentation in PyTorch - A Plug and Play Model
 
 If you need hands segmentations for your project, you are in the correct place!
 
- ```
- If you use the code of this repo and you find this project useful, please consider to give a star ⭐ !
- ```
+```bash
+If you use the code of this repo and you find this project useful, 
+please consider to give a star ⭐!
+```
+
+## Updates
+- **[2021/04/03]** - The code is online!
+- **[2022/08/04]** - This repo was used in the 3rd model entry at the "AI City Challenge 2022" challenge at CVPR 2022. 
+  - [VISTA: Vision Transformer enhanced by U-Net and Image Colorfulness Frame Filtration for Automatic Retail Checkout](https://openaccess.thecvf.com/content/CVPR2022W/AICity/papers/Shihab_VISTA_Vision_Transformer_Enhanced_by_U-Net_and_Image_Colorfulness_Frame_CVPRW_2022_paper.pdf), Shihab et al, CVPRW 2022.
 
 # Direct Usage form Torch Hub
 
@@ -202,4 +209,5 @@ python main.py \
 ```
 
   
+
 
