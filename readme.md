@@ -8,6 +8,17 @@ If you use the code of this repo and you find this project useful,
 please consider to give a star ⭐!
 ```
 
+If you use this repo for your project please cite this project using:
+```bibtex
+@article{camporese2021HandsSeg,
+  title   = "Hands Segmentation in PyTorch, A Plug and Play Model",
+  author  = "Camporese, Guglielmo",
+  journal = "https://github.com/guglielmocamporese",
+  year    = "2021",
+  url     = "https://github.com/guglielmocamporese/hands-segmentation-pytorch"
+}
+```
+
 [![DOI](https://zenodo.org/badge/354173236.svg)](https://zenodo.org/badge/latestdoi/354173236)
 
 ## Updates
