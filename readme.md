@@ -3,6 +3,8 @@
 
 If you need hands segmentations for your project, you are in the correct place!
 
+[![DOI](https://zenodo.org/badge/354173236.svg)](https://zenodo.org/badge/latestdoi/354173236)
+
 ```bash
 If you use the code of this repo and you find this project useful, 
 please consider to give a star ⭐!
@@ -18,8 +20,6 @@ If you use this repo for your project please cite this project using:
   url     = "https://github.com/guglielmocamporese/hands-segmentation-pytorch"
 }
 ```
-
-[![DOI](https://zenodo.org/badge/354173236.svg)](https://zenodo.org/badge/latestdoi/354173236)
 
 ## Updates
 - **[2021/04/03]** - The code is online!
