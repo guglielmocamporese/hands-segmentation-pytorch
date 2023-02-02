@@ -1,4 +1,3 @@
-
 # Hands Segmentation in PyTorch - A Plug and Play Model
 
 If you need hands segmentations for your project, you are in the correct place!
@@ -54,7 +53,7 @@ preds = model(img_rnd).argmax(1) # [B, H, W]
 
 ### Table
 | Dataset                | Partition  | mIoU  |
-| ---------------------- | ---------- | ----- |
+| :--------------------: | :--------: | :---: |
 | EgoYouTubeHands        | Validation | 0.818 |
 | EgoYouTubeHands        | Test       | 0.816 |
 | EgoHands               | Validation | 0.919 |
@@ -223,4 +222,27 @@ python main.py \
 
   
 
+# Working with Grayscale Inputs
+If you need to work with grayscale images, you just need to:
+* Add the `in_channels=1` argument to either the `training`, `validation`, `test`, `predict` command,
+* Use the `model_checkpoint="checkpoints/checkpoint-grayscale.ckpt" as the model checkpoint`.
 
+### Results with grayscale inputs
+The model that uses grayscale inputs has been trained with all the datasets available above in this project, with all the images converted from RGB to grayscale.
+
+Here you can find the results on the validation and test sets using the grayscale model evaluated on the grayscale datasets.
+| Dataset                | Input     | Partition   | mIoU   |
+| :--------------------: | :-------: | :---------: | :----: |
+| EgoYouTubeHands        | Grayscale |  Validation | 78.49% |
+| EgoYouTubeHands        | Grayscale |  Test       | 79.36% |
+| EgoHands               | Grayscale |  Validation | 90.31% |
+| EgoHands               | Grayscale |  Test       | 90.32% |
+| HandOverFace           | Grayscale |  Validation | 81.98% |
+| HandOverFace           | Grayscale |  Test       | 74.50% |
+| GTEA                   | Grayscale |  Validation | 94.89% |
+| GTEA                   | Grayscale |  Test       | 94.01% |
+
+# Working with RGBD Inputs
+If you need to work with grayscale images, you just need to add the `in_channels=4` argument to either the `training`, `validation`, `test`, `predict` command.
+
+However, at this time there are no available models in this project pre-trained on RGBD datasets.

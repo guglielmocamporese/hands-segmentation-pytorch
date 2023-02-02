@@ -19,6 +19,9 @@ from model import HandSegModel
 from dataloader import get_dataloader, show_samples, Denorm
 
 def get_args():
+    """
+    read the input arguments.
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', type=str, default='test', 
                         help='Mode of the program. Can be "train", "test" or "predict".')
@@ -33,28 +36,68 @@ def get_args():
                         help='Load the PyTorch pretrained model.')
     parser.add_argument('--model_checkpoint', type=str, default='', help='The model checkpoint to load.')
     parser.add_argument('--lr', type=float, default=3e-4, help='The learning rate.')
+    parser.add_argument('--in_channels', type=int, default=3, choices=[1, 3, 4],
+                        help='The number of input channels (3 for RGB, 1 for Grayscale, 4 for RGBD).')
     args = parser.parse_args()
     print(json.dumps(vars(args), indent=4))
     return args
 
 def get_model(args):
+    """
+    build the model.
+    """
     model_args = {
         'pretrained': args.model_pretrained,
         'lr': args.lr,
+        'in_channels': args.in_channels,
     }
     model = HandSegModel(**model_args)
     if len(args.model_checkpoint) > 0:
-        model = model.load_from_checkpoint(args.model_checkpoint)
+        model = model.load_from_checkpoint(args.model_checkpoint, **model_args)
         print(f'Loaded checkpoint from {args.model_checkpoint}.')
     return model
 
+def get_image_transform(args):
+    """
+    build the image transforms.
+    """
+    image_transform = None
+    pad_rgb2rgbd = lambda x: torch.cat([x, torch.zeros(3, x.shape[1], x.shape[2])], 0)
+    pad_gray2rgbd = lambda x: torch.cat([x.repeat(3, 1, 1), torch.zeros(3, x.shape[1], x.shape[2])], 0)
+    def to_rgbd(x):
+        C = x.shape[0]
+        if C == 4: return x
+        elif C == 3: return pad_rgb2rgbd(x)
+        elif C == 1: return pad_gray2rgbd(x)
+    if args.in_channels == 1:
+        image_transform = transforms.Compose([
+            transforms.Resize((args.height, args.width)),
+            transforms.ToTensor(),
+            lambda x: x if x.shape[0] == 3 else x.repeat(3, 1, 1),
+            lambda x: x.mean(0, keepdims=True), # convert RGB into grayscale
+            transforms.Normalize(mean=[0.5], std=[0.5]),
+        ])
+    elif args.in_channels == 3:
+        image_transform = transforms.Compose([
+            transforms.Resize((args.height, args.width)),
+            transforms.ToTensor(),
+            lambda x: x if x.shape[0] == 3 else x.repeat(3, 1, 1),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ])
+    elif args.in_channels == 4:
+        image_transform = transforms.Compose([
+            transforms.Resize((args.height, args.width)),
+            transforms.ToTensor(),
+            lambda x: x if x.shape[0] == 4 else to_rgbd(x),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406, 0.5], std=[0.229, 0.224, 0.225, 0.5]),
+        ])
+    return image_transform
+
 def get_dataloaders(args):
-    image_transform = transforms.Compose([
-        transforms.Resize((args.height, args.width)),
-        transforms.ToTensor(),
-        lambda x: x if x.shape[0] == 3 else x.repeat(3, 1, 1),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ])
+    """
+    build the dataloaders.
+    """
+    image_transform = get_image_transform(args)
     mask_transform = transforms.Compose([
         transforms.Resize((args.height, args.width)),
         transforms.ToTensor(),
@@ -78,10 +121,13 @@ def get_dataloaders(args):
     }
     return dls
 
-def get_predict_dataset(args, transform=None):
+def get_predict_dataset(args):
+    """
+    """
     image_paths = sorted(os.listdir(args.data_base_path))
     image_paths = [os.path.join(args.data_base_path, f) for f in image_paths]
     print(f'Found {len(image_paths)} in {args.data_base_path}.')
+    transform = get_image_transform(args)
     class ImageDataset(Dataset):
         def __init__(self, image_paths, transform=None):
             super(ImageDataset, self).__init__()
@@ -100,59 +146,29 @@ def get_predict_dataset(args, transform=None):
     return ImageDataset(image_paths, transform=transform)
 
 def main(args):
+    """
+    main function.
+    """
 
     # Model
     model = get_model(args)
+    print("model built")
 
     # Mode
     if args.mode == 'train':
-
-        # Dataloaders
-        dls = get_dataloaders(args)
-
-        if args.model_pretrained:
-            mean = np.array([0.485, 0.456, 0.406])
-            std = np.array([0.229, 0.224, 0.225])
-            denorm_fn = Denorm(mean, std)
-            model.set_denorm_fn(denorm_fn)
+        dls = get_dataloaders(args) # Dataloader
         trainer = pl.Trainer(max_epochs=args.epochs, gpus=args.gpus)
         trainer.fit(model, dls['train'], dls['validation'])
-
     elif args.mode == 'validation':
-
-        # Dataloaders
-        dls = get_dataloaders(args)
-
-        if args.model_pretrained:
-            mean = np.array([0.485, 0.456, 0.406])
-            std = np.array([0.229, 0.224, 0.225])
-            denorm_fn = Denorm(mean, std)
-            model.set_denorm_fn(denorm_fn)
+        dls = get_dataloaders(args) # Dataloader
         trainer = pl.Trainer(gpus=args.gpus)
         trainer.test(model, dls['validation'])
-
     elif args.mode == 'test':
-
-        # Dataloaders
-        dls = get_dataloaders(args)
-
-        if args.model_pretrained:
-            mean = np.array([0.485, 0.456, 0.406])
-            std = np.array([0.229, 0.224, 0.225])
-            denorm_fn = Denorm(mean, std)
-            model.set_denorm_fn(denorm_fn)
+        dls = get_dataloaders(args) # Dataloader
         trainer = pl.Trainer(gpus=args.gpus)
         trainer.test(model, dls['test'])
-
     elif args.mode == 'predict':
-
-        # Dataset
-        transform = transforms.Compose([
-            transforms.ToTensor(),
-            lambda x: x if x.shape[0] == 3 else x.repeat(3, 1, 1),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-        ])
-        ds = get_predict_dataset(args, transform=transform)
+        ds = get_predict_dataset(args) # Dataset
 
         # Save prediction
         _ = model.eval()
@@ -166,7 +182,6 @@ def main(args):
             preds = Image.fromarray(preds.numpy().astype(np.uint8), 'L')
             preds = preds.resize((W, H))
             preds.save(f'{x_path}.png')
-
     else:
         raise Exception(f'Error. Mode "{args.mode}" is not supported.')
 
