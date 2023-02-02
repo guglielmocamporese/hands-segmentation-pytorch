@@ -14,7 +14,7 @@ please consider to give a star ⭐!
 If you use this repo for your project please cite this project using:
 ```bibtex
 @article{camporese2021HandsSeg,
-  title   = "Hands Segmentation in PyTorch, A Plug and Play Model",
+  title   = "Hands Segmentation is All You Need",
   author  = "Camporese, Guglielmo",
   journal = "https://github.com/guglielmocamporese",
   year    = "2021",
