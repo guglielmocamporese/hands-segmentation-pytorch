@@ -1,3 +1,5 @@
+
+
 # Hands Segmentation in PyTorch - A Plug and Play Model
 
 If you need hands segmentations for your project, you are in the correct place!
@@ -221,14 +223,22 @@ python main.py \
 ```
 
   
+# Extra
+<details>
+<summary>Working with Grayscale Inputs</summary>
 
 # Working with Grayscale Inputs
+
 If you need to work with grayscale images, you just need to:
 * Add the `in_channels=1` argument to either the `training`, `validation`, `test`, `predict` command,
 * Use the `model_checkpoint="checkpoints/checkpoint-grayscale.ckpt" as the model checkpoint`.
 
 ### Results with grayscale inputs
 The model that uses grayscale inputs has been trained with all the datasets available above in this project, with all the images converted from RGB to grayscale.
+
+### Predictions on some test images
+
+![alt text](test_preds_grayscale.png "Title")
 
 Here you can find the results on the validation and test sets using the grayscale model evaluated on the grayscale datasets.
 | Dataset                | Input     | Partition   | mIoU   |
@@ -241,8 +251,15 @@ Here you can find the results on the validation and test sets using the grayscal
 | HandOverFace           | Grayscale |  Test       | 74.50% |
 | GTEA                   | Grayscale |  Validation | 94.89% |
 | GTEA                   | Grayscale |  Test       | 94.01% |
+</details>
+
+<details>
+<summary>Working with RGBD Inputs</summary>
 
 # Working with RGBD Inputs
+
 If you need to work with grayscale images, you just need to add the `in_channels=4` argument to either the `training`, `validation`, `test`, `predict` command.
 
 However, at this time there are no available models in this project pre-trained on RGBD datasets.
+
+</details>
