@@ -144,7 +144,7 @@ We provide the code for downloading our model checkpoint:
 # Download our pre-trained model
 $ ./scripts/download_model_checkpoint.sh
 ```
-This will download the checkpoint `checkpoint.ckpt` inside the `./checkpoint` folder.
+This will download the checkpoint `checkpoint.ckpt` inside the `checkpoint` folder.
 
   
 # Predict From a Custom Dataset
@@ -164,8 +164,8 @@ You can find an example of a script used for predicting at `scripts/predict.sh`.
 ```bash
 python main.py \
 	--mode predict \
-	--data_base_path './test_images' \
-	--model_checkpoint "./checkpoint/checkpoint.ckpt" \
+	--data_base_path 'test_images' \
+	--model_checkpoint "checkpoint/checkpoint.ckpt" \
 	--model_pretrained
 ```
 
@@ -184,8 +184,8 @@ python main.py \
 	--datasets 'eyth eh hof gtea' \
 	--height 256 \
 	--width 256 \
-	--data_base_path './data' \
-	--model_checkpoint "./checkpoint/checkpoint.ckpt"
+	--data_base_path 'data' \
+	--model_checkpoint 'checkpoint/checkpoint.ckpt'
 	--model_pretrained
 ```
 
@@ -204,7 +204,7 @@ python main.py \
 	--datasets 'eyth eh hof gtea' \
 	--height 256 \
 	--width 256 \
-	--data_base_path './data' \
+	--data_base_path 'data' \
 	--model_pretrained
 ```
 
@@ -217,9 +217,9 @@ An example of script used for testing the model is reported in `scripts/test.sh`
 ```bash
 python main.py \
 	--mode test \
-	--data_base_path "./data" \
+	--data_base_path "data" \
 	--model_pretrained \
-	--model_checkpoint "./checkpoint/checkpoint.ckpt"
+	--model_checkpoint "checkpoint/checkpoint.ckpt"
 ```
 
   

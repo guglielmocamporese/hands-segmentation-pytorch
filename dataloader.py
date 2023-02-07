@@ -93,7 +93,7 @@ class EYTHDataset(Dataset):
             split_filename = 'test.txt'
         else:
             raise Exception(f'Error. Partition "{self.partition}" is not supported.')
-        with open(os.path.join(self.data_base_path, f'train-val-test-split/{split_filename}'), 'r') as f:
+        with open(os.path.join(self.data_base_path, 'train-val-test-split', 'split_filename'), 'r') as f:
             for l in f.readlines():
                 l = l.strip()
                 image_paths += [os.path.join(self.data_base_path, 'images', l)]
@@ -448,7 +448,7 @@ if __name__ == '__main__':
         lambda m: torch.where(m > 0, torch.ones_like(m), torch.zeros_like(m))
     ])
     dl_args = {
-        'data_base_path': './data',
+        'data_base_path': 'data',
         'partition': 'validation',
         'datasets': ['eyth', 'eh', 'hof', 'gtea'],
         'image_transform': image_transform,
