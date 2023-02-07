@@ -27,7 +27,6 @@ class HandSegModel(pl.LightningModule):
     def __init__(self, pretrained=False, lr=1e-4, in_channels=3):
         super().__init__()
         assert in_channels in [1, 3, 4]
-        print("in_channels", in_channels)
         self.deeplab = self._get_deeplab(pretrained=pretrained, num_classes=2, in_channels=in_channels)
         self.denorm_image_for_tb_log = None # For tensorboard logging
         self.lr = lr
@@ -45,12 +44,12 @@ class HandSegModel(pl.LightningModule):
         Get the PyTorch DeepLab model architecture.
         """
         deeplab = models.segmentation.deeplabv3_resnet50(
-            weights=None,
+            pretrained=False,
             num_classes=num_classes
         )
         if pretrained:
             deeplab_21 = models.segmentation.deeplabv3_resnet50(
-                weights='COCO_WITH_VOC_LABELS_V1',
+                pretrained=True,
                 progress=True,
                 num_classes=21
             )
