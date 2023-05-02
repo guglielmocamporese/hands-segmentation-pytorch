@@ -8,6 +8,7 @@ Torch Hub script for accessing te hand segmentation model outside the repo.
 
 dependencies = ['torch', 'pytorch_lightning']
 
+import torch
 from model import HandSegModel
 import gdown
 import os
@@ -25,7 +26,7 @@ def hand_segmentor(pretrained=True, *args, **kwargs):
         #os.system('chmod +x ./scripts/download_model_checkpoint.sh')
         #os.system('./scripts/download_model_checkpoint.sh')
         _download_file_from_google_drive('1w7dztGAsPHD_fl_Kv_a8qHL4eW92rlQg', './checkpoint/checkpoint.ckpt')
-        model = model.load_from_checkpoint('./checkpoint/checkpoint.ckpt', *args, **kwargs)
+        model = model.load_from_checkpoint('./checkpoint/checkpoint.ckpt', map_location=torch.device('cpu'), *args, **kwargs)
     return model
 
 
