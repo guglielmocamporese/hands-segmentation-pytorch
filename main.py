@@ -140,9 +140,15 @@ def get_predict_dataset(args):
         def __getitem__(self, idx):
             image_path = self.image_paths[idx]
             image = Image.open(image_path)
+            W, H = image.size
+            sample = {
+                "image": image,
+                "height": H,
+                "width": W,
+            }
             if self.transform is not None:
-                image = self.transform(image)
-            return image, image_path
+                sample["image"] = self.transform(sample["image"])
+            return sample, image_path
     return ImageDataset(image_paths, transform=transform)
 
 def main(args):
@@ -173,14 +179,14 @@ def main(args):
         # Save prediction
         _ = model.eval()
         device = next(model.parameters()).device
-        for x, x_path in tqdm(ds, desc='Save predictions'):
-            H, W = x.shape[-2:]
-            x = transforms.Resize((256, 256))(x)
+        for sample, x_path in tqdm(ds, desc='Save predictions'):
+            x = sample["image"]
+            H, W = sample["height"], sample["width"]
             x = x.unsqueeze(0).to(device)
             logits = model(x).detach().cpu()
-            preds = F.softmax(logits, 1).argmax(1)[0] * 255 # [h, w]
+            preds = F.softmax(logits, 1).squeeze(0)[1] * 255 # [h, w]
             preds = Image.fromarray(preds.numpy().astype(np.uint8), 'L')
-            preds = preds.resize((W, H))
+            preds = preds.resize((W, H), resample=Image.BICUBIC)
             preds.save(f'{x_path}.png')
     else:
         raise Exception(f'Error. Mode "{args.mode}" is not supported.')
