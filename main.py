@@ -125,7 +125,7 @@ def get_predict_dataset(args):
     """
     """
     image_paths = sorted(os.listdir(args.data_base_path))
-    image_paths = [os.path.join(args.data_base_path, f) for f in image_paths]
+    image_paths = [os.path.join(args.data_base_path, f) for f in image_paths if not f.endswith("-pred.png")]
     print(f'Found {len(image_paths)} in {args.data_base_path}.')
     transform = get_image_transform(args)
     class ImageDataset(Dataset):
@@ -180,6 +180,7 @@ def main(args):
         _ = model.eval()
         device = next(model.parameters()).device
         for sample, x_path in tqdm(ds, desc='Save predictions'):
+            out_path = x_path[:-4]
             x = sample["image"]
             H, W = sample["height"], sample["width"]
             x = x.unsqueeze(0).to(device)
@@ -187,7 +188,7 @@ def main(args):
             preds = F.softmax(logits, 1).squeeze(0)[1] * 255 # [h, w]
             preds = Image.fromarray(preds.numpy().astype(np.uint8), 'L')
             preds = preds.resize((W, H), resample=Image.BICUBIC)
-            preds.save(f'{x_path}.png')
+            preds.save(f'{out_path}-pred.png')
     else:
         raise Exception(f'Error. Mode "{args.mode}" is not supported.')
 
